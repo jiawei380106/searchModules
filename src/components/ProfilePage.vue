@@ -1,10 +1,10 @@
 <template>
   <div id="show-modules">
-    <h1>Profile Page</h1>
+    <h1>Search Modules</h1>
     <input type="text" v-model="search" placeholder="search modules">
     <div v-for="module in filteredModules" class="single-module">
       <h2>{{module["ModuleCode"]}} {{module["ModuleTitle"]}}</h2>
-      <article>module description</article>
+      <article>{{module["ModuleDescription"]}}</article>
     </div>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
     HelloWorld
   },
   firebase: {
-    modules: db.ref("se/data")
+    modules: db.ref("se/data"),
+    mod_info: db.ref('mods_info/data')
   },
   data() {
     return {
