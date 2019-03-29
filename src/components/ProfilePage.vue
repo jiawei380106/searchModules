@@ -4,6 +4,8 @@
     <input type="text" v-model="search" placeholder="search modules">
     <div v-for="module in filteredModules" class="single-module">
       <h2>{{module["ModuleCode"]}} {{module["ModuleTitle"]}}</h2>
+      <h4>{{module['Department']}} •  {{module['ModuleCredit']}} MCs</h4>
+      <h4>Workload: {{module['Workload']}}</h4>
       <article>{{module["ModuleDescription"]}}</article>
     </div>
   </div>
@@ -12,6 +14,7 @@
 <script>
 import HelloWorld from "./HelloWorld";
 import { db } from "@/firebase.js";
+import _ from 'lodash';
 //import {seRef} from '@/firebase.js'
 
 export default {
@@ -20,8 +23,7 @@ export default {
     HelloWorld
   },
   firebase: {
-    modules: db.ref("se/data"),
-    mod_info: db.ref('mods_info/data')
+    modules: db.ref('mods_info/data')
   },
   data() {
     return {
@@ -40,6 +42,7 @@ export default {
         return module["ModuleCode"].match(this.search.toUpperCase());
       });
     }
+    
   }
 };
 </script>
@@ -64,5 +67,6 @@ export default {
   margin: 20px 0;
   box-sizing: border-box;
   background: #eee;
+  
 }
 </style>
